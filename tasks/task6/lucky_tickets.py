@@ -41,7 +41,7 @@ def gen_six_digit_tickets():
     """
     The function returns a list of six-digit numbers in a range from 000001 to 999999
     """
-    all_tickets = [''.join(i) for i in itertools.product("0123456789", repeat=6)]
+    all_tickets = [''.join(i) for i in itertools.product("0123456789", repeat=6)][1:]
     return all_tickets
 
 
@@ -49,7 +49,7 @@ class LuckyTickets:
     def __init__(self, list_of_tickets):
         self.list_of_tickets = list_of_tickets
 
-    def get_moscow(self):
+    def get_moscow_lucky_tickets(self):
         """
         The method counts the tickets which numbers match the rule:
         the sum of the first tree digits is equal to the sum of the last tree digits
@@ -60,7 +60,7 @@ class LuckyTickets:
                 num_moscow_lucky_tickets += 1
         return num_moscow_lucky_tickets
 
-    def get_peter(self):
+    def get_piter_lucky_tickets(self):
         """
         The method counts the tickets which numbers match the rule:
         the sum of the even digits is equal to the sum of the odd digits
@@ -86,9 +86,9 @@ def main():
         list_of_all_tickets = gen_six_digit_tickets()
         t = LuckyTickets(list_of_all_tickets)
         if choice == MOSKOW:
-            print(t.get_moscow())
+            print(t.get_moscow_lucky_tickets())
         elif choice == PITER:
-            print(t.get_peter())
+            print(t.get_piter_lucky_tickets())
     except FileNotFoundError:
         print(FILE_NOT_FOUND_MSG)
 

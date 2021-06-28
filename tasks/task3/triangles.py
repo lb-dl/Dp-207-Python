@@ -32,10 +32,10 @@ def main():
         run = is_exit()
 
     # sort triangles by their square
-    sorted_triangles = sorted(list_of_triangles, key=lambda x: x.get_square(), reverse=True)
+    sorted_triangles = sorted(list_of_triangles, key=lambda x: x.get_area(), reverse=True)
     print(OUTPUT_STR)
     for triangle in sorted_triangles:
-        triangle.__str__()
+        triangle.__repr__()
 
 
 def validation(value):
@@ -56,7 +56,8 @@ def is_exit():
     The function checks for the user input in order to continue (returns 'True')
     or quit a programme (returns 'False')
     """
-    answer = input(f'Would you like to continue?')
+    answer = input(f'Would you like to continue? Enter "yes" or "y" to continue. '
+                   f'Press any other button to quit')
     if answer.lower() in ['y', 'yes']:
         return True
     else:
@@ -73,14 +74,14 @@ class Triangle:
         self.side_a = side_a
         self.side_b = side_b
         self.side_c = side_c
-        self.square = 0
+        self.area = 0
 
-    def get_square(self):
+    def get_area(self):
 
         # Counts and returns a square of a triangle
         p = 0.5*(self.side_a + self.side_b + self.side_c)
-        self.square = sqrt(p*(p - self.side_a) * (p - self.side_b) * (p - self.side_c))
-        return self.square
+        self.area = sqrt(p*(p - self.side_a) * (p - self.side_b) * (p - self.side_c))
+        return self.area
 
     def is_triangle(self):
 
@@ -92,8 +93,8 @@ class Triangle:
         else:
             return False
 
-    def __str__(self):
-        print('[' + self.name + ']: ' + str(self.square) + ' cm')
+    def __repr__(self):
+        print('[' + self.name + ']: ' + str(self.area) + ' cm')
 
 
 if __name__ == '__main__':
