@@ -2,7 +2,8 @@ from math import sqrt
 
 INSTRUCTIONS = 'Enter a width, height of the envelop, separated by a comma "," (e.g. "5,6")'
 HELP_MSG = 'The width and height must be numbers greater than 0, separated by commas, e.g. "5,6". Try again, please'
-YES_ANSWER = 'It is possible to fit one envelop into another envelop'
+YES_SECOND_ENVELOP = 'It is possible to fit second envelop into first envelop'
+YES_FIRST_ENVELOP = 'It is possible to fit first envelop into second envelop'
 NO_ANSWER = 'It is not possible to fit one envelop into another envelop'
 MESSAGE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop'
 
@@ -23,33 +24,16 @@ def main():
             width2, height2 = [float(x) if validation(float(x)) else print(HELP_MSG) for x in input().split(',')]
             e1 = Envelop(height1, width1)
             e2 = Envelop(height2, width2)
-            if compare_envelops(e1.width, e1.height, e2.width, e2.height):
-                print(YES_ANSWER)
+            if e1 > e2:
+                print(YES_SECOND_ENVELOP)
+            elif e2 > e1:
+                print(YES_FIRST_ENVELOP)
             else:
                 print(NO_ANSWER)
         except ValueError:
             print(HELP_MSG)
         run = is_exit()
 
-
-def compare_envelops(p, q, a, b):
-    """
-    The function takes four arguments: 'p', 'q' are a width and a height of the 1st envelop;
-    'a', 'b' are a width and a height of the 2nd envelop. It checks for a number of conditions
-    and returns 'True' if it is possible or 'False' in case it is impossible to fit 1 envelopment
-    into another one.
-    """
-
-    if (p > a and q > b) or (p < a and q < b):
-        return True
-    if p <= q:
-        p, q = q, p
-    if a <= b:
-        a, b = b, a
-    if p > a and b >= (2*p*q*a + (p*p - q*q)*sqrt(p*p + q*q - a*a))/(p*p + q*q):
-        return True
-    else:
-        return False
 
 
 def user_answer(string):
@@ -87,12 +71,17 @@ def is_exit():
     else:
         return False
 
+
 class Envelop:
     """ A class Envelop """
 
     def __init__(self, width, height):
         self.width = width
         self.height = height
+
+    def __lt__(self, other) -> bool:
+        return (self.width > other.width and self.height > other.height) or \
+                (self.width < other.width and self.height < other.height)
 
 
 if __name__ == '__main__':
