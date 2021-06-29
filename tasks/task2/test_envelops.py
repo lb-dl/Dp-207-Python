@@ -1,5 +1,7 @@
-from .envelop import Envelop, compare_envelops
+from .envelop import Envelop
 
 
 def test_compare_envelops():
-    assert compare_envelops(5, 7, 8, 10)
+    e1 = Envelop(5, 7)
+    e2 = Envelop(8, 10)
+    assert e1 > e2

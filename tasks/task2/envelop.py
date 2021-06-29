@@ -35,7 +35,6 @@ def main():
         run = is_exit()
 
 
-
 def user_answer(string):
     """
     The function checks if a string is 'y' or 'yes'
