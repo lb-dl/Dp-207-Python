@@ -1,16 +1,15 @@
 class Chess:
-    help = 'Height and weight of a chess board must be integers, e.g. "4" '
+    help = 'Height and weight of a chess board must be integers greater than zero, e.g. "4" '
 
-    def __init__(self, h, w):
-        self.h = h
-        self.w = w
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
 
     def chess_board(self):
-        for i in range(1, self.h+1):
-            if i % 2 != 0:
-                print('* ' * self.w)
-            else:
-                print(' ' + '* ' * self.w)
+        chess_board = [
+            '* ' * self.width if i % 2 != 0
+            else ' ' + '* ' * self.width for i in range(1, self.height + 1)]
+        return chess_board
 
 
 if __name__ == '__main__':
@@ -24,6 +23,7 @@ if __name__ == '__main__':
         elif not isinstance(h, int) and not isinstance(w, int):
             print(Chess.help)
         chess = Chess(h, w)
-        chess.chess_board()
+        for line in chess.chess_board():
+            print(line)
     except ValueError:
         print(Chess.help)

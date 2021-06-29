@@ -1,9 +1,8 @@
-#from .chess import Chess
-
-# def print_symbol():
-#     """chess_board should print '*' """
-#     expected_symbol = '* '
-#     printed_symbol = '* '
-#     assert expected_symbol == printed_symbol
+from .chess import Chess
 
 
+def test_chess_board():
+    expected_chess_board = ['* * ']
+    chess = Chess(1, 2)
+    result = chess.chess_board()
+    assert expected_chess_board == result
