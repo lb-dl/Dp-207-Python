@@ -1,9 +1,10 @@
 from math import sqrt
 
-INSTRUCTIONS = 'Enter a name and three sides of a triangle, separated by commas "," (e.g "name, 4, 5, 6")'
+INSTRUCTIONS = 'Enter a name and three sides of a triangle, separated by commas "," (e.g "name, 4, 5, 6") \n'
 HELP_MSG = 'The triangle sides must be numbers greater than 0. Try again, please'
 OUTPUT_STR = '============= Triangles list: ==============='
 NOT_EXISTED_TRIANGLE = 'There is not a triangle with entered sides'
+MESSAGE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop \n'
 
 
 def main():
@@ -11,8 +12,7 @@ def main():
     run = True
     while run:
         try:
-            print(INSTRUCTIONS)
-            user_input = input()
+            user_input = get_user_input()
             if user_input:
                 values = user_input.split(',')
                 triangle_name = values[0]
@@ -38,17 +38,19 @@ def main():
         triangle.__repr__()
 
 
+def get_user_input():
+
+    # Ask users for input
+    user_input = input(INSTRUCTIONS)
+    return user_input
+
+
 def validation(value):
     """
     The function checks and returns 'True' if the entered values are numbers greater than 0.
     Otherwise, it prints a message with the further instructions and returns 'False'.
     """
-
-    if isinstance(value, float) and value > 0:
-        return True
-    else:
-        print(HELP_MSG)
-        return False
+    return isinstance(value, float) and value > 0
 
 
 def is_exit():
@@ -56,19 +58,14 @@ def is_exit():
     The function checks for the user input in order to continue (returns 'True')
     or quit a programme (returns 'False')
     """
-    answer = input(f'Would you like to continue? Enter "yes" or "y" to continue. '
-                   f'Press any other button to quit')
-    if answer.lower() in ['y', 'yes']:
-        return True
-    else:
-        return False
+    answer = input(MESSAGE)
+    return answer.lower() in ['y', 'yes']
 
 
 class Triangle:
     """
     Class Triangle
     """
-
     def __init__(self, name, side_a, side_b, side_c):
         self.name = name
         self.side_a = side_a
