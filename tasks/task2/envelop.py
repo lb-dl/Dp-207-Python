@@ -1,11 +1,11 @@
 from math import sqrt
 
-INSTRUCTIONS = 'Enter a width, height of the envelop, separated by a comma "," (e.g. "5,6")'
+INSTRUCTIONS = 'Enter a width, height of the envelop, separated by a comma "," (e.g. "5,6") \n'
 HELP_MSG = 'The width and height must be numbers greater than 0, separated by commas, e.g. "5,6". Try again, please'
 YES_SECOND_ENVELOP = 'It is possible to fit second envelop into first envelop'
 YES_FIRST_ENVELOP = 'It is possible to fit first envelop into second envelop'
-NO_ANSWER = 'It is not possible to fit one envelop into another envelop'
-MESSAGE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop'
+NO_ANSWER = "It's impossible to fit one envelop into another envelop"
+MESSAGE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop \n'
 
 
 def main():
@@ -18,15 +18,15 @@ def main():
     run = True
     while run:
         try:
-            print(INSTRUCTIONS)
-            width1, height1 = [float(x) if validation(float(x)) else print(HELP_MSG) for x in input().split(',')]
-            print(INSTRUCTIONS)
-            width2, height2 = [float(x) if validation(float(x)) else print(HELP_MSG) for x in input().split(',')]
+            width1, height1 = [float(x) if validation(float(x))
+                               else print(HELP_MSG) for x in get_user_input().split(',')]
+            width2, height2 = [float(x) if validation(float(x))
+                               else print(HELP_MSG) for x in get_user_input().split(',')]
             e1 = Envelop(height1, width1)
             e2 = Envelop(height2, width2)
-            if e1 > e2:
+            if e1.__lt__(e2):
                 print(YES_SECOND_ENVELOP)
-            elif e2 > e1:
+            elif e2.__lt__(e1):
                 print(YES_FIRST_ENVELOP)
             else:
                 print(NO_ANSWER)
@@ -35,15 +35,11 @@ def main():
         run = is_exit()
 
 
-def user_answer(string):
-    """
-    The function checks if a string is 'y' or 'yes'
-    """
+def get_user_input():
 
-    if string.lower() in ['y', 'yes']:
-        return True
-    else:
-        return False
+    # Ask users for input
+    user_input = input(INSTRUCTIONS)
+    return user_input
 
 
 def validation(value):
@@ -51,7 +47,6 @@ def validation(value):
     The function checks and returns 'True' if the entered values are numbers greater than 0.
     Otherwise it prints a message with the further instructions and returns 'False'.
     """
-
     if isinstance(value, float) and value > 0:
         return True
     else:
@@ -64,11 +59,8 @@ def is_exit():
     The function checks for the user input in order to continue (returns 'True')
     or quit a programme (returns 'False')
     """
-    answer = input(f'Would you like to continue?')
-    if answer.lower() in ['y', 'yes']:
-        return True
-    else:
-        return False
+    answer = input(MESSAGE)
+    return answer.lower() in ['y', 'yes']
 
 
 class Envelop:
@@ -79,8 +71,7 @@ class Envelop:
         self.height = height
 
     def __lt__(self, other) -> bool:
-        return (self.width > other.width and self.height > other.height) or \
-                (self.width < other.width and self.height < other.height)
+        return self.width > other.width and self.height > other.height
 
 
 if __name__ == '__main__':
