@@ -77,7 +77,7 @@ class Triangle:
 
         # Counts and returns a square of a triangle
         p = 0.5*(self.side_a + self.side_b + self.side_c)
-        self.area = sqrt(p*(p - self.side_a) * (p - self.side_b) * (p - self.side_c))
+        self.area = round(sqrt(p*(p - self.side_a) * (p - self.side_b) * (p - self.side_c)))
         return self.area
 
     def is_triangle(self):
