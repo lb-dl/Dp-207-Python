@@ -34,4 +34,4 @@ def test_user_input_3_params():
 
 def test_user_answer_yes():
     with mock.patch.object(builtins, 'input', lambda _: 'y'):
-        assert __eq__(is_exit(), True)
+        assert is_exit().__eq__(True)
