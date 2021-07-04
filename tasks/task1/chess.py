@@ -1,6 +1,7 @@
-MESSAGE_TO_CONTINUE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop \n'
-HELP_MSG = 'Height and weight of a chess board must be integers greater than zero, e.g. "4" '
-INSTRUCTIONS = 'To build a chessboard enter to integers: a height and a width of a chessboard, please'
+MESSAGE_TO_CONTINUE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop. \n'
+HELP_MSG = 'Height and width of a chess board must be integers greater than zero, e.g. "4". Try again, please. \n'
+INSTRUCTIONS = 'To build a chessboard enter two integers: a height and a width of a chessboard, please. \n'
+INPUT_MSG = 'Enter an integer, please. \n'
 
 
 class Chess:
@@ -38,14 +39,21 @@ def is_exit():
     return answer.lower() in ['y', 'yes']
 
 
+def get_user_input():
+
+    # Ask users for input
+    user_input = input(INPUT_MSG)
+    return user_input
+
+
 def main():
     print(INSTRUCTIONS)
     run = True
     while run:
         try:
-            h = int(input('Height: '))
+            h = int(get_user_input())
             if validation(h):
-                w = int(input('Width: '))
+                w = int(get_user_input())
                 if validation(w):
                     chess = Chess(h, w)
                     for line in chess.chess_board():
