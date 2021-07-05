@@ -14,7 +14,7 @@ def mock_data_file(tmpdir):
 def test_count_lines(mock_data_file):
     test_count_str = CountString(mock_data_file, 'task')
     test_res = test_count_str.get_number_of_given_str()
-    assert test_res == '2 strings were found in the file'
+    assert test_res == '2 strings were found in the file\n'
 
 
 def test_replace_lines(mock_data_file):
