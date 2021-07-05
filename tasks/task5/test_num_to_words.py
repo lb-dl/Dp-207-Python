@@ -1,11 +1,16 @@
 import pytest
+import random
 
 from .num_to_words import *
 
 
 @pytest.fixture()
 def num_to_words():
-    return NumberToWords(100890)
+    return NumberToWords(random.randint(0, 1000000001))
+
+
+def test_a_random_number_to_words(num_to_words):
+    assert num_to_words.number_to_words
 
 
 def test_get_digits(num_to_words):
@@ -25,5 +30,4 @@ def numbers():
 @pytest.mark.parametrize("number", numbers())
 def test_num_to_words(number):
     assert NumberToWords().number_to_words(number)
-
 
