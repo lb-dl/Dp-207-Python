@@ -5,6 +5,7 @@ HELP_MSG = 'The triangle sides must be numbers greater than 0. Try again, please
 OUTPUT_STR = '============= Triangles list: ==============='
 NOT_EXISTED_TRIANGLE = 'There is not a triangle with entered sides'
 MESSAGE = 'Would you like to continue? Enter "yes" or "y" to continue. Enter another button to stop \n'
+INVALID_DATA_MSG = 'Entered data is incorrect. Try again, please'
 
 
 def main():
@@ -15,18 +16,21 @@ def main():
             user_input = get_user_input()
             if user_input:
                 values = user_input.split(',')
-                triangle_name = values[0]
-                side_a = float(values[1])
-                side_b = float(values[2])
-                side_c = float(values[3])
-                if validation(side_a) and validation(side_b) and validation(side_c):
-                    triangle = Triangle(triangle_name, side_a, side_b, side_c)
-                    if triangle.is_triangle():
-                        list_of_triangles.append(triangle)
-                    else:
-                        print(NOT_EXISTED_TRIANGLE)
+                if len(values) != 4:
+                    print(INVALID_DATA_MSG)
                 else:
-                    print(HELP_MSG)
+                    triangle_name = values[0]
+                    side_a = float(values[1])
+                    side_b = float(values[2])
+                    side_c = float(values[3])
+                    if validation(side_a) and validation(side_b) and validation(side_c):
+                        triangle = Triangle(triangle_name, side_a, side_b, side_c)
+                        if triangle.is_triangle():
+                            list_of_triangles.append(triangle)
+                        else:
+                            print(NOT_EXISTED_TRIANGLE)
+                    else:
+                        print(HELP_MSG)
         except ValueError:
             print(HELP_MSG)
         run = is_exit()
