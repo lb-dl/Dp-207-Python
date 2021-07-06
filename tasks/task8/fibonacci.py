@@ -19,9 +19,6 @@ def get_numbers():
     return num1, num2
 
 
-
-
-
 class FibonacciSequence:
 
     def __init__(self, num1, num2):
@@ -82,7 +79,7 @@ def main():
     try:
         f = FibonacciSequence(num1, num2)
         f.__repr__()
-        print(f.fib_list())
+        print(*f.fib_list(), sep=', ')
     except ValueError:
         print(INCORRECT_NUM_MSG)
 
