@@ -47,8 +47,3 @@ def test_user_answer_yes():
 def test_user_input():
     with unittest.mock.patch('builtins.input', return_value='triangle1, 4.3,5.2,6.7'):
         assert get_user_input() == 'triangle1, 4.3,5.2,6.7'
-
-
-def test_sort_triangles():
-    test_list_of_triangles = [['tr1', 11.18], ['tr2', 9.12], ['tr3', 292.42], ['tr4', 3.55]]
-    assert sort_triangles(test_list_of_triangles) == []
